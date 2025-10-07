@@ -45,3 +45,43 @@ Date of the customer's most recent order
 {% docs number_of_orders %}
 Total count of orders placed by the customer (defaults to 0 for customers with no orders)
 {% enddocs %}
+
+{% docs stg_stripe__payments %}
+Cleaned and standardized payment data with renamed columns and amount converted from cents to dollars.
+{% enddocs %}
+
+{% docs payment_id %}
+Unique identifier for each payment
+{% enddocs %}
+
+{% docs amount %}
+Payment amount in dollars (converted from cents)
+{% enddocs %}
+
+{% docs created %}
+Timestamp when the payment was created
+{% enddocs %}
+
+{% docs payment_method %}
+Method used for the payment (e.g., credit_card, bank_transfer)
+{% enddocs %}
+
+{% docs payment_status %}
+Current status of the payment (e.g., success, pending, failed)
+{% enddocs %}
+
+{% docs batched_at %}
+Timestamp when the record was batched into the data warehouse
+{% enddocs %}
+
+{% docs lifetime_value %}
+Total dollar amount spent by the customer across all orders (defaults to 0 for customers with no orders)
+{% enddocs %}
+
+{% docs dim_customers %}
+Dimensional model providing a comprehensive view of each customer including their first and most recent order dates, total order count, and lifetime value.
+{% enddocs %}
+
+{% docs fct_orders %}
+Fact table containing order-level transactions with associated payment amounts.
+{% enddocs %}

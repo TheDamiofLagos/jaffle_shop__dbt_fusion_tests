@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: '{{ doc("fct_orders") }}'
+    columns:
+      - name: order_id
+        description: '{{ doc("order_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: '{{ doc("customer_id") }}'
+        tests:
+          - not_null
+      - name: amount
+        description: '{{ doc("amount") }}'

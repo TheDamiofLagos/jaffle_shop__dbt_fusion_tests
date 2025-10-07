@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_stripe__payments
+    description: '{{ doc("stg_stripe__payments") }}'
+    columns:
+      - name: id
+        description: '{{ doc("payment_id") }}'
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: '{{ doc("order_id") }}'
+        tests:
+          - not_null
+      - name: amount
+        description: '{{ doc("amount") }}'
+      - name: created
+        description: '{{ doc("created") }}'
+      - name: payment_method
+        description: '{{ doc("payment_method") }}'
+      - name: status
+        description: '{{ doc("payment_status") }}'
+      - name: _batched_at
+        description: '{{ doc("batched_at") }}'

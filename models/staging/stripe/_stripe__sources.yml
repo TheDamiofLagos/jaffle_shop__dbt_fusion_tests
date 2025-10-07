@@ -1,0 +1,20 @@
+sources:
+  - name: stripe
+    description: "This is the source data for stripe"
+    database: raw
+    schema: stripe
+		tables:
+			- name: payment
+				columns:
+					- name: id
+						description: '{{ doc("payment_id")}}'
+					- name: amount
+						description: '{{ doc("amount")}}'
+					- name: created
+						description: '{{ doc("created")}}'
+					- name: orderid
+						description: '{{ doc("order_id")}}'
+					- name: paymentmethod
+						description: '{{ doc("payment_method")}}'
+					- name: status
+						description: '{{ doc("status")}}'
