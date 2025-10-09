@@ -5,7 +5,7 @@
 }}
 
 select
-    amount/100 as amount,
+    {{ cents_to_dollars("amount")}} as amount,
     created,
     id,
     orderid as order_id,
