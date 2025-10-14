@@ -38,9 +38,12 @@ models:
     staging:
       +materialized: view
       +tags: ["staging"]
+      +schema: "{{ 'stg' if target.name == 'prod' else target.schema }}"
     intermediate:
       +materialized: view
       +tags: ["intermediate"]
+      +schema: "{{ 'int' if target.name == 'prod' else target.schema }}"
     marts:
       +materialized: table
       +tags: ["marts"]
+      +schema: "{{ 'mrt' if target.name == 'prod' else target.schema }}"
