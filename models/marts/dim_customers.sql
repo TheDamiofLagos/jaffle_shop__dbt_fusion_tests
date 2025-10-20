@@ -1,6 +1,13 @@
 {{
     config(
-        tags=['jaffle_shop', 'marts', 'dimensional']
+        tags=['jaffle_shop', 'marts', 'dimensional'],
+        post_hook=[
+            "{{ log_model_stats(this, row_threshold=50) }}",
+            "{{ log_data_quality_checks(this, {
+                'null_check_columns': ['customer_id', 'first_name', 'last_name'],
+                'duplicate_check': 'customer_id'
+            }) }}"
+        ]
     )
 }}
 
