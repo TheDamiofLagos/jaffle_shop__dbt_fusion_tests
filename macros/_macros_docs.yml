@@ -9,3 +9,25 @@ macros:
 			- name: decimals
 			  description: The number of decimal places to round to. Default is 2.
 				type: integer
+
+	- name: grant_select 
+		description: >
+			Generates a SQL GRANT SELECT statement for the specified relation and role.
+		arguments:
+			- name: database
+			  description: The database where the relation resides.
+				type: string
+			- name: schema
+			  description: The schema where the relation resides.
+				type: string
+			- name: role
+			  description: The database role to grant SELECT permissions to.
+				type: string
+	
+	- name: log_data_quality_checks
+		description: >
+			Performs data quality checks on a specified model and logs the results.		
+
+		arguments:
+			- name: relation
+			  description: The dbt relation object (use `this` in post-hooks or `ref
