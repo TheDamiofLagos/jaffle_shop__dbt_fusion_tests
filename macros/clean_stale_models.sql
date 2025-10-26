@@ -24,6 +24,6 @@
         {% else %}
             {{ log('Droppinng object with command: ' ~ query, info=True) }}
             {% do run_query(query) %}
-        {% enndif %}
+        {% endif %}
     {% endfor %}
 {% endmacro %}
