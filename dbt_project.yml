@@ -27,6 +27,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 vars:
   dbt_full_refresh_targets: ('prod', 'qa')
 
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
@@ -49,3 +50,7 @@ models:
       +materialized: table
       +tags: ["marts"]
       +schema: "{{ 'mrt' if target.name == 'prod' else target.schema }}"
+
+seeds:
+  jaffle_shop:
+    +schema: raw_dbt
