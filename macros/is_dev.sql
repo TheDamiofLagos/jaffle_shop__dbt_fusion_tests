@@ -4,4 +4,4 @@
     {%- else -%}
         {{ return(false) }}
     {%- endif -%}
-{% endmacro % %}
+{% endmacro %}

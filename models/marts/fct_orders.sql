@@ -17,6 +17,9 @@ with
             status
         from
             {{ ref('stg_jaffle_shop__orders') }}
+        {% if is_dev() %}
+        limit 100
+        {% endif %}
     )
 
 select 

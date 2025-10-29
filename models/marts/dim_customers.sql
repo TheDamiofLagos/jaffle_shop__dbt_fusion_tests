@@ -72,3 +72,6 @@ final as (
 )
 
 select * from final
+{% if is_dev %}
+limit 5
+{% endif %}
