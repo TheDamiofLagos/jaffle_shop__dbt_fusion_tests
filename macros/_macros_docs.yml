@@ -31,3 +31,8 @@ macros:
 		arguments:
 			- name: relation
 			  description: The dbt relation object (use `this` in post-hooks or `ref
+
+	- name: is_dev
+		description: >
+			Determines if the current target environment is a development environment based on the `dbt_full_refresh_targets` variable.
+		arguments: []
