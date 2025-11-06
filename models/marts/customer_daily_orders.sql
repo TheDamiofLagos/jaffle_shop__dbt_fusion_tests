@@ -22,7 +22,7 @@ customer_orders as (
     from {{ ref('stg_jaffle_shop__orders') }}
     group by all
 )
-
+--comment: "Generate a surrogate key for each customer daily order record"
 select
     {{ dbt_utils.generate_surrogate_key(
         ['customer_orders.customer_id', 'date_spine.date_day']
