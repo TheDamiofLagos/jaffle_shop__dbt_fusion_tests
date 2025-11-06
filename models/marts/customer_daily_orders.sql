@@ -13,7 +13,7 @@ with date_spine as (
         )
     }}
 ),
-
+--comment: "Aggregate daily order counts per customer"
 customer_orders as (
     select
         customer_id,
