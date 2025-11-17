@@ -1,3 +1,9 @@
+((
+    config(
+        materialized='incremental'
+    )
+))
+
 with
     payment as (
         select
@@ -20,13 +26,25 @@ with
         {% if is_dev() %}
         limit 100
         {% endif %}
+    ),
+
+    final as (
+        select 
+            orders.order_date,
+            orders.order_id,
+            orders.customer_id,
+            SUM(payment.amount) as amount
+        from 
+            orders
+        left join payment using (order_id)
+        group by 1,2
     )
 
 select 
-    orders.order_id,
-    orders.customer_id,
-    SUM(payment.amount) as amount
-from 
-    orders
-left join payment using (order_id)
-group by 1,2
+    *
+from final
+{% if is_incremental() %}
+where order_date > (select max(order_date) from {{ this }})
+{% endif %}
+order by order_date desc
+
