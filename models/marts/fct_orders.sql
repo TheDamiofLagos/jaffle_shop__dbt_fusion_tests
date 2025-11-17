@@ -1,8 +1,8 @@
-((
+{{
     config(
         materialized='incremental'
     )
-))
+}}
 
 with
     payment as (
@@ -37,7 +37,7 @@ with
         from 
             orders
         left join payment using (order_id)
-        group by 1,2
+        group by 1,2,3
     )
 
 select 
