@@ -2,7 +2,9 @@
     config(
         static_analysis='off',
         materialized='incremental',
-        incremental_strategy='append'
+        incremental_strategy='merge',
+        merge_update_columns=['order_date', 'amount'],
+        unique_key='order_id'
     )
 }}
 
