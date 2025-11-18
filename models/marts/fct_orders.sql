@@ -1,10 +1,19 @@
 {{
     config(
-        materialized='incremental'
+        static_analysis='off',
+        materialized='incremental',
+        incremental_strategy='append'
     )
 }}
 
 with
+    {% if is_incremental() %}
+    max_date as (
+        select coalesce(max(order_date), '1900-01-01'::date) as max_order_date 
+        from {{ this }}
+    ),
+    {% endif %}
+
     payment as (
         select
             order_id,
@@ -23,6 +32,10 @@ with
             status
         from
             {{ ref('stg_jaffle_shop__orders') }}
+        {% if is_incremental() %}
+        cross join max_date
+        where order_date > max_date.max_order_date
+        {% endif %}
         {% if is_dev() %}
         limit 100
         {% endif %}
@@ -43,8 +56,4 @@ with
 select 
     *
 from final
-{% if is_incremental() %}
-where order_date > (select max(order_date) from {{ this }})
-{% endif %}
 order by order_date desc
-
