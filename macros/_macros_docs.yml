@@ -36,3 +36,27 @@ macros:
 		description: >
 			Determines if the current target environment is a development environment based on the `dbt_full_refresh_targets` variable.
 		arguments: []
+	
+	- name: validate_data
+		description: >
+			Generic data validation macro following dbt best practices. Provides reusable validation logic that can be used as generic tests, in post-hooks, or for custom data quality assertions. Returns failed records (empty result = validation passed).
+		arguments:
+			- name: validation_type
+			  description: >
+					Type of validation to perform. Valid types: not_null, unique, positive, non_negative, date_range, email_format, referential_integrity, accepted_values, custom_sql, expression_is_true, row_count
+				type: string
+			- name: column_name
+			  description: Column to validate (required for most validation types, optional for row_count and custom_sql)
+				type: string
+			- name: config
+			  description: >
+					Configuration dictionary with validation-specific options:
+					- error_message: Custom error message (all types)
+					- allow_nulls: Whether to allow null values (default: false)
+					- min_date, max_date: Date range boundaries (date_range)
+					- parent_model, parent_column: Foreign key reference (referential_integrity)
+					- values: List of accepted values (accepted_values)
+					- validation_sql: Custom SQL condition (custom_sql)
+					- expression, condition: Custom expressions (expression_is_true)
+					- min_rows, max_rows: Row count thresholds (row_count)
+				type: dict
